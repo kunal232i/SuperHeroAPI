@@ -11,8 +11,10 @@ let getSuperHero = (id, name) => {
   fetch(`${BASE_URL}/${id}`)
     .then((response) => response.json())
     .then((json) => {
-      console.log(json);
-      heroImageDiv.innerHTML = `<img src="${json.image.url}" height=200 width=200/>`;
+      const name = `<h2>${json.name}</h2>`;
+      const intelligence = `<p>Intelligence: ${json.powerstats.intelligence}</p>`;
+      heroImageDiv.innerHTML = `${name}<img src="${json.image.url}" 
+      height=200 width=200/>${intelligence}`;
     });
 };
 
