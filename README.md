@@ -10,7 +10,7 @@ The SuperheroAPI App is a simple web application that allows you to search for a
 
 ## Live Site
 
-You can access the live version of the SuperheroAPI App [here](https://main--papaya-panda-332385.netlify.app/).
+You can access the live version of the SuperheroAPI App [here](https://main--hero-album.netlify.app/).
 
 ## Technologies Used
 
