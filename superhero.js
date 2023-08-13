@@ -4,6 +4,18 @@ var newHeroButton = document.getElementById("newHeroButton");
 var heroImageDiv = document.getElementById("heroImage");
 var searchButton = document.getElementById("searchButton");
 var searchInput = document.getElementById("searchInput");
+var showPopup = function (message) {
+    var popup = document.getElementById("popup");
+    var popupMessage = document.getElementById("popup-message");
+    var closePopupButton = document.getElementById("closePopupButton");
+    if (popup && popupMessage && closePopupButton) {
+        popupMessage.textContent = message;
+        popup.style.display = "flex";
+        closePopupButton.onclick = function () {
+            popup.style.display = "none";
+        };
+    }
+};
 var getSuperHero = function (id) {
     fetch("".concat(BASE_URL, "/").concat(id))
         .then(function (response) { return response.json(); })
@@ -41,8 +53,13 @@ var getSearchSuperHero = function (name) {
     fetch("".concat(BASE_URL, "/search/").concat(name))
         .then(function (response) { return response.json(); })
         .then(function (json) {
-        var hero = json.results[0];
-        showHeroInfo(hero);
+        if (json.response === "error") {
+            showPopup("Superhero not found or wrong entry.");
+        }
+        else {
+            var hero = json.results[0];
+            showHeroInfo(hero);
+        }
     });
 };
 searchButton.onclick = function () { return getSearchSuperHero(searchInput.value); };

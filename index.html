@@ -9,13 +9,25 @@
 </head>
 
 <body>
-  <h2>🌟 Super Hero App</h2>
-  <p>You can search for a super hero like "batman" or "thanos" or... You can generate a random hero</p>
-  <input id='searchInput' type="text">
-  <button id='searchButton'>Search</button>
-  <button id='newHeroButton'>Random Hero</button>
-  </br>
-  <div id='heroImage'><img src="" alt=""></div>
+  <div class="container">
+    <h2 class="title">🌟 Super Hero App</h2>
+    <p class="description">You can search for a superhero like "batman" or "thanos". You can also generate a random
+      hero.</p>
+    <div class="search-section">
+      <input id="searchInput" type="text" placeholder="Search for a superhero...">
+      <button id="searchButton">Search</button>
+      <button id="newHeroButton">Random Hero</button>
+    </div>
+    <div id="heroImage" class="hero-image">
+      <img src="" alt="">
+    </div>
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <span id="popup-message"></span>
+        <button id="closePopupButton">Close</button>
+      </div>
+    </div>
+  </div>
   <script src="superhero.js"></script>
 </body>
 

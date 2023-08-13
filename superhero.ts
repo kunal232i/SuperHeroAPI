@@ -17,6 +17,21 @@ interface SuperHero {
   powerstats: PowerStats;
 }
 
+const showPopup = (message: string): void => {
+  const popup = document.getElementById("popup") as HTMLElement;
+  const popupMessage = document.getElementById("popup-message") as HTMLElement;
+  const closePopupButton = document.getElementById("closePopupButton") as HTMLButtonElement;
+
+  if (popup && popupMessage && closePopupButton) {
+    popupMessage.textContent = message;
+    popup.style.display = "flex";
+
+    closePopupButton.onclick = () => {
+      popup.style.display = "none";
+    };
+  }
+};
+
 const getSuperHero = (id: number) => {
   fetch(`${BASE_URL}/${id}`)
     .then((response) => response.json())
@@ -36,7 +51,7 @@ const statToEmoji: Record<string, string> = {
   combat: "⚔️",
 };
 
-const showHeroInfo = (character: SuperHero) => {
+const showHeroInfo = (character: SuperHero): void => {
   const name = `<h2>${character.name}</h2>`;
   const img = `<img src="${character.image.url}" height=200 width=200/>`;
 
@@ -56,13 +71,18 @@ const randomHero = (): number => {
 
 newHeroButton.onclick = () => getSuperHero(randomHero());
 
-const getSearchSuperHero = (name: string) => {
+
+const getSearchSuperHero = (name: string): void => {
   console.log(searchInput.value);
   fetch(`${BASE_URL}/search/${name}`)
     .then((response) => response.json())
-    .then((json: { results: SuperHero[] }) => {
-      const hero = json.results[0];
-      showHeroInfo(hero);
+    .then((json) => {
+      if (json.response === "error") {
+        showPopup("Superhero not found or wrong entry.");
+      } else {
+        const hero: SuperHero = json.results[0];
+        showHeroInfo(hero);
+      }
     });
 };
 
